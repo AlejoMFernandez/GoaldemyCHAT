@@ -32,6 +32,7 @@ export default {
       try {
         this.loading = true;
         await updateAuthUserData(this.formData);
+        this.$router.push('/profile');
       } catch (error) {
 
       }

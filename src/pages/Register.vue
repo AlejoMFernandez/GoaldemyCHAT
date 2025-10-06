@@ -25,6 +25,7 @@ export default {
 
         await register(this.user.email, this.user.password);
 
+        this.$router.push('/profile');
       } catch(error){
         console.error(error);
       }
