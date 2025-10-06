@@ -79,7 +79,8 @@ export default {
             >
               <div class="m-0 text-sm font-semibold text-slate-200"><span>{{ message.email }}</span></div>
               <div class="my-1 whitespace-pre-line">{{ message.content }}</div>
-              <div class="text-slate-400 text-xs">{{ message.created_at }}</div>
+              <!-- hora formateada a: dia/mes SIN AÑO hora:minutos -->
+              <div class="m-0 text-xs font-light text-slate-400">{{ new Date(message.created_at).toLocaleString([], { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) }}</div>
             </li>
         </ol>
       </section>
