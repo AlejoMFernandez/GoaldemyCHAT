@@ -9,5 +9,5 @@ export default {
     <div class="container mx-auto px-4 py-6 text-sm">
       © 2025 · <a class="hover:text-white transition" href="https://goaldemy.com/">Goaldemy.com</a>
     </div>
-  </footer>
+  </footer> 
 </template>

@@ -6,6 +6,7 @@ import Login from '../pages/Login.vue';
 import Register from '../pages/Register.vue';
 import Profile from '../pages/Profile.vue';
 import ProfileEdit from '../pages/ProfileEdit.vue';
+import News from '../pages/News.vue';
 
 const routes = [
     {         path: '/',              component: Home },
@@ -14,6 +15,7 @@ const routes = [
     {         path: '/Chat',          component: GlobalChat, meta: { requiresAuth: true } },
     {         path: '/Profile',       component: Profile, meta: { requiresAuth: true } },
     {         path: '/ProfileEdit',   component: ProfileEdit, meta: { requiresAuth: true } },
+    {         path: '/News',          component: News },
 ]
 
 const router = createRouter({
