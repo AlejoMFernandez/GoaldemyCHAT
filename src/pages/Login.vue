@@ -66,8 +66,9 @@ export default {
           v-model="user.password"
         />
       </div>
-      <div class="pt-2">
+      <div class="pt-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <AppButton type="submit">Acceder</AppButton>
+        <span>¿No tienes cuenta? <router-link to="/register" class="text-blue-500">Regístrate</router-link></span>
       </div>
     </form>
   </div>

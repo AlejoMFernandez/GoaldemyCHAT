@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { subscribeToAuthStateChanges } from '../services/auth';
+import { subscribeToAuthStateChanges, authReady } from '../services/auth';
 import Home from '../pages/Home.vue';
 import GlobalChat from '../pages/GlobalChat.vue';
 import Login from '../pages/Login.vue';
@@ -31,9 +31,11 @@ let user = {
 subscribeToAuthStateChanges(userState => {
     user = userState;
 });
-router.beforeEach((to, from) => {
+router.beforeEach(async (to, from) => {
+    // Esperar a que cargue el estado inicial de auth (evita redirecciones por "flicker")
+    await authReady;
     if (to.meta.requiresAuth && user.id === null) {
-        return '/login' ;
+        return '/Login';
     }
 });
 

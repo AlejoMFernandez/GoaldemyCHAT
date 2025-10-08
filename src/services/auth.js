@@ -4,23 +4,32 @@ import { createUserProfile, getUserProfileById, updateUserProfile } from './user
 let user = {
     id: null,
     email: null,
-}
+};
 let observers = [];
 
-loadUserCurrentAuthState();
-async function loadUserCurrentAuthState() {
-    const { data, error } = await supabase.auth.getUser();
-    if (error) {
-        console.error('[Auth.vue loadUserCurrentAuthState]:', error);
-        return;
+// Carga inicial del estado de autenticación y exporta una promesa que se resuelve cuando termina.
+export const authReady = (async function loadUserCurrentAuthState() {
+    try {
+        const { data, error } = await supabase.auth.getUser();
+        if (error) {
+            console.error('[auth.js loadUserCurrentAuthState]:', error);
+            setAuthUserState({ id: null, email: null });
+            return;
+        }
+        if (data && data.user) {
+            setAuthUserState({
+                id: data.user.id,
+                email: data.user.email,
+            });
+            await loadExtendedProfile();
+        } else {
+            setAuthUserState({ id: null, email: null });
+        }
+    } catch (e) {
+        console.error('[auth.js loadUserCurrentAuthState catch]:', e);
+        setAuthUserState({ id: null, email: null });
     }
-    setAuthUserState({
-        id: data.user.id,
-        email: data.user.email,
-    });
-
-    loadExtendedProfile();
-}
+})();
 
 async function loadExtendedProfile() {
     if (user.id === null) return;
